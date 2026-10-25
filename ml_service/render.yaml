@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: metropt-ml-api
+    env: python
+    rootDir: ml_service
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: FRONTEND_ORIGIN
+        value: "http://localhost:5173"
+      - key: GEMINI_API_KEY
+        sync: false
