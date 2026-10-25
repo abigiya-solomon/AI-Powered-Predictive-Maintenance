@@ -1,7 +1,29 @@
 # AI-Powered Predictive Maintenance and Machine Health Intelligence System
 ### Case Study: MetroPT-3 Rolling Stock Air Compressor Telemetry
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel%20Production-000000?style=for-the-badge&logo=vercel)](https://ai-powered-predictive-maintenance-35zrb2uy3-abigiya.vercel.app)
+[![API Status](https://img.shields.io/badge/ML%20API-Live%20on%20Render-46E3B7?style=for-the-badge&logo=render)](https://metropt-ml-api.onrender.com/api/health)
+[![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python)](https://www.python.org/)
+[![React 18](https://img.shields.io/badge/Frontend-React%2018%20%2B%20Vite-61DAFB?style=for-the-badge&logo=react)](https://ai-powered-predictive-maintenance-35zrb2uy3-abigiya.vercel.app)
+
 An end-to-end, production-grade industrial predictive maintenance platform for metro-train air production units (APUs). The system analyzes continuous multi-sensor pneumatic telemetry (10-second sampling cadence), detects subtle mechanical degradation (such as air leaks and valve bypasses) using trained unsupervised anomaly detection models (**One-Class SVM**), visualizes physical sensor trends, and prepares structured telemetry payloads for downstream **Gemini 3.8 Flash** conversational reasoning.
+
+---
+
+## 🌐 Live Application & Production Endpoints
+
+| Component | Platform | Live URL | Status |
+| :--- | :--- | :--- | :---: |
+| **Production Web Dashboard** | **Vercel** | [**`ai-powered-predictive-maintenance.vercel.app`**](https://ai-powered-predictive-maintenance-35zrb2uy3-abigiya.vercel.app) | ![Vercel](https://img.shields.io/badge/Vercel-Active-brightgreen?style=flat-square&logo=vercel) |
+| **ML Inference REST API** | **Render** | [**`metropt-ml-api.onrender.com/api/health`**](https://metropt-ml-api.onrender.com/api/health) | ![Render](https://img.shields.io/badge/Render-Healthy-brightgreen?style=flat-square&logo=render) |
+| **Model Benchmark API** | **Render** | [**`metropt-ml-api.onrender.com/api/benchmark`**](https://metropt-ml-api.onrender.com/api/benchmark) | ![Leaderboard](https://img.shields.io/badge/Leaderboard-200%20OK-blue?style=flat-square) |
+
+> 🚀 **Quick Live Demo**:
+> 1. Open the [**Live Dashboard**](https://ai-powered-predictive-maintenance-35zrb2uy3-abigiya.vercel.app).
+> 2. Ensure the top-right badge shows **`LIVE API`** (green dot).
+> 3. Navigate to **Upload & Analysis**.
+> 4. Click **"Load Sample Telemetry"** (or upload any MetroPT-3 CSV).
+> 5. Click **"Run Anomaly Detection"** to trigger live streaming ML inference on Render, compute the 10 causal physics features, and render interactive multi-sensor degradation charts!
 
 ---
 
@@ -315,21 +337,22 @@ Constructs structured JSON telemetry summary for Gemini Flash.
    - **Build Command:** `npm run build`.
    - **Output Directory:** `dist`.
 4. Under **Environment Variables**, add:
-   - `VITE_API_BASE_URL`: The public URL of your deployed Flask ML service (e.g., `https://metropt-ml-api.onrender.com`).
-   - `VITE_DEMO_MODE`: `false`.
+   - `VITE_API_BASE_URL`: `https://metropt-ml-api.onrender.com`
+   - `VITE_DEMO_MODE`: `false`
 5. Deploy. `vercel.json` ensures client-side routing routes properly for all pages.
+   - **Live Production URL:** [https://ai-powered-predictive-maintenance-35zrb2uy3-abigiya.vercel.app](https://ai-powered-predictive-maintenance-35zrb2uy3-abigiya.vercel.app)
 
 ### B. Deploy Flask ML Service (Render, Railway, Fly.io, or VPS)
 1. Python version: `3.11`.
 2. Root directory: `ml_service`.
 3. Startup command:
    ```bash
-   gunicorn -w 2 -b 0.0.0.0:$PORT app:app --timeout 120
+   gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 app:app
    ```
 4. Environment variables:
-   - `FRONTEND_ORIGIN`: Your deployed Vercel domain (e.g. `https://metropt-predictive-maintenance.vercel.app`).
+   - `FRONTEND_ORIGIN`: `https://ai-powered-predictive-maintenance-35zrb2uy3-abigiya.vercel.app,http://localhost:5173`
    - `GEMINI_API_KEY`: (Optional) Your Google Gemini API key.
-5. Verify health: `curl https://your-backend.com/api/health`.
+5. Live production endpoint: [https://metropt-ml-api.onrender.com/api/health](https://metropt-ml-api.onrender.com/api/health).
 
 ---
 
