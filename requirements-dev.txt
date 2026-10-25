@@ -1,0 +1,4 @@
+# Root Development Dependencies
+-r ml_service/requirements.txt
+pytest>=8.0.0
+ruff>=0.4.0
